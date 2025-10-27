@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epidemic Risk Prediction | EpidemicAI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🦠 EpidemicAI</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="prediction.html" class="active">Prediction</a></li>
+                <li><a href="docs.html">Documentation</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Prediction Header -->
+    <section class="prediction-header">
+        <div class="container">
+            <h2 class="page-title">Epidemic Risk Prediction</h2>
+            <p class="page-subtitle">Real-time analysis of environmental factors affecting epidemic risk</p>
+        </div>
+    </section>
+
+    <!-- Location Input Section -->
+    <div class="container" id="location-input-section">
+        <div class="location-selector">
+            <div class="selector-header">
+                <h3 class="selector-title">📍 Select Location</h3>
+                <div class="selector-options">
+                    <button class="toggle-input active" data-mode="auto">🌐 Auto-Detect</button>
+                    <button class="toggle-input" data-mode="manual">✏️ Manual Entry</button>
+                </div>
+            </div>
+            <div class="input-container">
+                <div class="auto-detect-mode">
+                    <button class="btn btn-primary btn-large" id="fetch-location-btn">
+                        <span class="btn-icon">🌍</span>
+                        Detect My Location
+                    </button>
+                </div>
+                <div class="manual-mode hidden">
+                    <div class="input-group">
+                        <label for="city-input">City Name</label>
+                        <input type="text" id="city-input" placeholder="Enter city name (e.g., New Delhi, Mumbai)" />
+                    </div>
+                    <div class="input-group">
+                        <label for="country-input">Country</label>
+                        <input type="text" id="country-input" placeholder="Enter country (e.g., India, USA)" />
+                    </div>
+                    <button class="btn btn-primary btn-large" id="manual-submit-btn">
+                        <span class="btn-icon">🔍</span>
+                        Analyze Location
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="prediction-loading" class="prediction-loading hidden">
+        <div class="loading-spinner-large"></div>
+        <p class="loading-message">Fetching location and environmental data...</p>
+    </div>
+
+    <!-- Prediction Content -->
+    <div id="prediction-content" class="prediction-content hidden">
+        <div class="container">
+            <!-- Location Info -->
+            <div class="info-card location-card">
+                <h3 class="info-card-title">
+                    <span class="info-icon">📍</span>
+                    Detected Location
+                </h3>
+                <div class="location-info">
+                    <p class="location-text" id="location-name">Loading...</p>
+                    <p class="location-coords" id="location-coords">-</p>
+                </div>
+            </div>
+
+            <!-- Weather Data -->
+            <div class="data-section">
+                <h3 class="section-heading">Meteorological Data</h3>
+                <div class="weather-grid">
+                    <div class="weather-card">
+                        <div class="weather-icon">🌡️</div>
+                        <div class="weather-info">
+                            <p class="weather-label">Temperature</p>
+                            <p class="weather-value" id="temperature">-</p>
+                        </div>
+                    </div>
+                    <div class="weather-card">
+                        <div class="weather-icon">💧</div>
+                        <div class="weather-info">
+                            <p class="weather-label">Humidity</p>
+                            <p class="weather-value" id="humidity">-</p>
+                        </div>
+                    </div>
+                    <div class="weather-card">
+                        <div class="weather-icon">🌬️</div>
+                        <div class="weather-info">
+                            <p class="weather-label">Wind Speed</p>
+                            <p class="weather-value" id="windspeed">-</p>
+                        </div>
+                    </div>
+                    <div class="weather-card">
+                        <div class="weather-icon">☁️</div>
+                        <div class="weather-info">
+                            <p class="weather-label">Cloud Cover</p>
+                            <p class="weather-value" id="cloudcover">-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Air Quality Data -->
+            <div class="data-section">
+                <h3 class="section-heading">Air Quality Data</h3>
+                <div class="aqi-card">
+                    <div class="aqi-header">
+                        <h4 class="aqi-title">Air Quality Index</h4>
+                        <div class="aqi-badge" id="aqi-badge">-</div>
+                    </div>
+                    <div class="aqi-details" id="aqi-details">
+                        <p class="aqi-loading">Loading air quality data...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Assessment -->
+            <div class="data-section">
+                <h3 class="section-heading">Risk Assessment</h3>
+                <div class="risk-card">
+                    <div class="risk-header">
+                        <h4 class="risk-title">Overall Epidemic Risk Score</h4>
+                        <div class="risk-score" id="risk-score">-</div>
+                    </div>
+                    <div class="risk-scale">
+                        <div class="scale-bar">
+                            <div class="scale-fill" id="scale-fill"></div>
+                        </div>
+                        <div class="scale-labels">
+                            <span>Low</span>
+                            <span>Moderate</span>
+                            <span>High</span>
+                            <span>Critical</span>
+                        </div>
+                    </div>
+                    <div class="risk-description">
+                        <p class="risk-text" id="risk-description-en"></p>
+                        <p class="risk-text-hindi" id="risk-description-hi"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disease Detection -->
+            <div class="data-section">
+                <h3 class="section-heading">Detected Disease Risks</h3>
+                <div class="disease-grid" id="disease-grid">
+                    <!-- Diseases will be populated here -->
+                </div>
+            </div>
+
+            <!-- Active Epidemic Alerts -->
+            <div class="data-section">
+                <h3 class="section-heading">Active Epidemic Status</h3>
+                <div class="epidemic-alert" id="epidemic-alert">
+                    <!-- Epidemic alert will be populated here -->
+                </div>
+            </div>
+
+            <!-- Historical Data -->
+            <div class="data-section">
+                <h3 class="section-heading">Historical Epidemic Data</h3>
+                <div class="historical-container">
+                    <div class="historical-chart">
+                        <canvas id="historical-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Visualization -->
+            <div class="data-section">
+                <h3 class="section-heading">Risk Factors Visualization</h3>
+                <div class="chart-container">
+                    <canvas id="risk-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">&copy; 2025 AI-Based Epidemic Prediction System. Capstone Project.</p>
+            <p class="footer-subtext">Built with modern web technologies and AI integration</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
