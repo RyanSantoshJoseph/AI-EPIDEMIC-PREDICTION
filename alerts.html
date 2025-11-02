@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Alerts | EpidemicAI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🦠 EpidemicAI</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="prediction.html">Prediction</a></li>
+                <li><a href="alerts.html" class="active">Alerts</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="docs.html">Documentation</a></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span id="alert-badge" class="alert-counter" style="background: var(--accent-primary); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600;"></span>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Alerts Header -->
+    <section class="prediction-header">
+        <div class="container">
+            <h2 class="page-title">Real-Time Epidemic Alerts</h2>
+            <p class="page-subtitle">Live monitoring of global health threats and risk assessments</p>
+        </div>
+    </section>
+
+    <!-- Alert Controls -->
+    <div class="container" style="padding-top: 2rem;">
+        <div class="info-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div>
+                <h3 style="margin-bottom: 0.5rem; color: var(--text-primary);">🚨 Active Monitoring</h3>
+                <p style="color: var(--text-secondary); margin: 0;">Updates every 30 seconds</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+                <button class="btn btn-secondary" id="refresh-btn" style="padding: 0.75rem 1.5rem;">
+                    🔄 Refresh Now
+                </button>
+                <button class="btn btn-secondary" id="clear-alerts-btn" style="padding: 0.75rem 1.5rem;">
+                    🗑️ Clear History
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alerts Container -->
+    <div class="container" style="padding: 2rem 0 4rem;">
+        <div id="alerts-container" class="alerts-grid">
+            <!-- Alerts will be dynamically loaded here -->
+            <div class="no-alerts-message" style="grid-column: 1/-1; text-align: center; padding: 4rem 2rem;">
+                <div style="font-size: 4rem; margin-bottom: 1rem;">🔍</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text-primary);">No Alerts Yet</h3>
+                <p style="color: var(--text-secondary);">Monitoring in progress... Alerts will appear here when detected.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">&copy; 2025 AI-Based Epidemic Prediction System. Capstone Project.</p>
+            <p class="footer-subtext">Built with modern web technologies and AI integration</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="script.js"></script>
+    <script src="alerts-system.js"></script>
+</body>
+</html>
+

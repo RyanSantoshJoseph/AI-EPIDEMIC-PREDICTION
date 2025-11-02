@@ -19,11 +19,16 @@
             <ul class="nav-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="prediction.html">Prediction</a></li>
+                <li><a href="alerts.html">Alerts</a></li>
+                <li><a href="admin.html">Admin</a></li>
                 <li><a href="docs.html" class="active">Documentation</a></li>
             </ul>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                <span class="theme-icon">🌙</span>
-            </button>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span id="alert-badge" class="alert-counter" style="background: var(--accent-primary); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; display: none;"></span>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -280,9 +285,71 @@
                 </div>
             </div>
 
-            <!-- Future Scope -->
+            <!-- Alert System -->
             <div class="doc-section">
                 <div class="doc-tag">Section 07</div>
+                <h2 class="doc-title">Real-Time Alert System</h2>
+                <div class="doc-text">
+                    <p>The system includes a sophisticated real-time alert monitoring feature that continuously analyzes global health data to identify potential epidemic risks.</p>
+                    <h3 class="doc-subtitle">Alert Detection Algorithm</h3>
+                    <ul class="doc-list">
+                        <li><strong>Data Source:</strong> COVID-19 statistics from disease.sh API</li>
+                        <li><strong>Update Frequency:</strong> Every 30 seconds</li>
+                        <li><strong>Thresholds:</strong> Case increase rate > 15% or death rate > 2%</li>
+                        <li><strong>Severity Levels:</strong> Low, Moderate, High</li>
+                    </ul>
+                    <h3 class="doc-subtitle">Alert Features</h3>
+                    <ul class="doc-list">
+                        <li>Color-coded severity indicators (🟢 Low, 🟡 Moderate, 🔴 High)</li>
+                        <li>Animated card presentation with fade-in effects</li>
+                        <li>Sound notification for high-risk alerts</li>
+                        <li>Persistent storage using localStorage</li>
+                        <li>Real-time timestamp tracking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div class="doc-section">
+                <div class="doc-tag">Section 08</div>
+                <h2 class="doc-title">Admin Dashboard</h2>
+                <div class="doc-text">
+                    <p>The admin dashboard provides authorized users with comprehensive control over the alert system and access to detailed analytics.</p>
+                    <h3 class="doc-subtitle">Access & Security</h3>
+                    <ul class="doc-list">
+                        <li><strong>Login Credentials:</strong> Username: admin, Password: epidemic@123</li>
+                        <li><strong>Session Management:</strong> localStorage-based authentication</li>
+                        <li><strong>Security:</strong> Client-side validation and secure logout</li>
+                    </ul>
+                    <h3 class="doc-subtitle">Dashboard Features</h3>
+                    <ul class="doc-list">
+                        <li><strong>Statistics Overview:</strong> Total alerts, severity distribution</li>
+                        <li><strong>Manual Alert Creation:</strong> Custom disease, region, severity, and message</li>
+                        <li><strong>Alert Management:</strong> Filter by severity and region</li>
+                        <li><strong>Real-time Updates:</strong> Instant display of new alerts</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3D Visualization -->
+            <div class="doc-section">
+                <div class="doc-tag">Section 09</div>
+                <h2 class="doc-title">Interactive 3D Homepage</h2>
+                <div class="doc-text">
+                    <p>The homepage features an immersive 3D globe visualization powered by Three.js, enhancing user engagement and visual appeal.</p>
+                    <h3 class="doc-subtitle">3D Globe Features</h3>
+                    <ul class="doc-list">
+                        <li><strong>Technology:</strong> Three.js WebGL rendering</li>
+                        <li><strong>Interactive Elements:</strong> Mouse-responsive rotation</li>
+                        <li><strong>Visual Design:</strong> Atmosphere glow, wireframe overlay, stars background</li>
+                        <li><strong>Performance:</strong> Optimized for smooth 60fps rendering</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Future Scope -->
+            <div class="doc-section">
+                <div class="doc-tag">Section 10</div>
                 <h2 class="doc-title">Future Scope & Enhancements</h2>
                 <div class="doc-text">
                     <h3 class="doc-subtitle">Short-term Improvements</h3>
@@ -316,7 +383,7 @@
 
             <!-- Contributions & Acknowledgments -->
             <div class="doc-section">
-                <div class="doc-tag">Section 08</div>
+                <div class="doc-tag">Section 11</div>
                 <h2 class="doc-title">Technologies & Acknowledgments</h2>
                 <div class="doc-text">
                     <h3 class="doc-subtitle">Technologies & Libraries Used</h3>
@@ -335,6 +402,12 @@
                         </div>
                         <div class="ack-item">
                             <strong>IPAPI</strong> - IP-based geolocation services
+                        </div>
+                        <div class="ack-item">
+                            <strong>Three.js</strong> - 3D graphics and globe visualization
+                        </div>
+                        <div class="ack-item">
+                            <strong>disease.sh</strong> - Real-time epidemic data API
                         </div>
                     </div>
 
@@ -355,12 +428,23 @@
     <footer class="footer">
         <div class="container">
             <p class="footer-text">&copy; 2025 AI-Based Epidemic Prediction System. Capstone Project.</p>
-            <p class="footer-subtext">Made by Ryan Santosh Joseph</p>
+            <p class="footer-subtext">Built with modern web technologies and AI integration</p>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        // Update alert badge
+        document.addEventListener('DOMContentLoaded', () => {
+            const alerts = JSON.parse(localStorage.getItem('epidemic_alerts') || '[]');
+            const badge = document.getElementById('alert-badge');
+            if (badge && alerts.length > 0) {
+                badge.textContent = alerts.length;
+                badge.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
-
 

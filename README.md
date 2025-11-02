@@ -6,6 +6,9 @@ A modern web application that leverages artificial intelligence and real-time en
 
 - **Real-Time Data Integration**: Connects to Open-Meteo, OpenAQ, and IPAPI for live environmental data
 - **AI-Powered Risk Assessment**: Analyzes multiple factors to calculate epidemic risk scores
+- **3D Interactive Homepage**: Immersive Three.js globe visualization with mouse interactivity
+- **Real-Time Alert System**: Continuous monitoring with 30-second updates and severity-based notifications
+- **Admin Dashboard**: Secure login, manual alert creation, and comprehensive analytics
 - **Bilingual Support**: Displays results in both English and Hindi
 - **Interactive Visualizations**: Beautiful charts using Chart.js
 - **Dark/Light Mode**: Modern UI with theme toggle functionality
@@ -17,11 +20,16 @@ A modern web application that leverages artificial intelligence and real-time en
 ```
 AI-Epidemic-Prediction/
 │
-├── index.html          # Homepage
-├── prediction.html     # Prediction module
-├── docs.html          # Documentation section
-├── style.css          # Global styles
-├── script.js          # JavaScript functionality
+├── index.html          # 3D Homepage with globe visualization
+├── prediction.html     # Risk prediction module
+├── alerts.html        # Real-time alert monitoring
+├── admin.html         # Admin dashboard (login required)
+├── docs.html          # Comprehensive documentation
+├── style.css          # Global styles with theme support
+├── script.js          # Core JavaScript functionality
+├── alerts-system.js   # Alert monitoring system
+├── admin-dashboard.js # Admin dashboard logic
+├── globe-3d.js        # Three.js 3D globe rendering
 ├── assets/            # Assets folder
 └── README.md          # This file
 ```
@@ -57,12 +65,31 @@ No build process or dependencies required!
 - Displays bilingual results (English and Hindi)
 - Shows interactive Chart.js visualization of risk factors
 
+### Real-Time Alerts
+
+- Live monitoring of global epidemic risks
+- Automatic detection based on case increase rates (>15%) or death rates (>2%)
+- Three severity levels: Low, Moderate, High
+- Sound notifications for high-risk alerts
+- Persistent storage using localStorage
+- Color-coded cards with smooth animations
+
+### Admin Dashboard
+
+- Secure login (username: admin, password: epidemic@123)
+- Statistics overview with severity distribution
+- Manual alert creation interface
+- Filter alerts by severity and region
+- Real-time updates across all pages
+
 ### Documentation
 
 - Comprehensive project overview
 - Detailed methodology
 - Technology stack information
 - API documentation
+- Alert system explanation
+- Admin dashboard guide
 - Future scope and enhancements
 
 ## 🔌 APIs Used
@@ -85,11 +112,18 @@ No build process or dependencies required!
 - **Endpoint**: https://ipapi.co/json/
 - **Free Tier**: Yes, 30,000 requests/month
 
+### disease.sh API
+- **Purpose**: Real-time COVID-19 statistics
+- **Data**: Cases, deaths, active, recovered
+- **Endpoint**: https://disease.sh/v3/covid-19/countries
+- **Free Tier**: Yes, no API key required
+
 ## 🎨 Technology Stack
 
 - **HTML5**: Semantic markup
 - **CSS3**: Modern styling with animations and glassmorphism
 - **JavaScript ES6+**: Interactive functionality
+- **Three.js**: 3D graphics and globe visualization
 - **Chart.js**: Data visualization library
 - **Google Fonts**: Inter and Noto Sans Devanagari
 
@@ -127,6 +161,17 @@ The system calculates epidemic risk based on:
 - Create a deployable, production-ready system
 
 ## 📊 Future Enhancements
+
+### Already Implemented ✨
+- ✅ Real-time alert monitoring system
+- ✅ Admin dashboard with secure authentication
+- ✅ 3D interactive homepage with Three.js globe
+- ✅ localStorage-based persistence
+- ✅ Severity-based alert categorization
+- ✅ Sound notifications for high-risk alerts
+- ✅ Comprehensive documentation
+- ✅ Dark/Light mode with smooth transitions
+- ✅ Responsive design for all devices
 
 ### Short-term
 - Integration of machine learning models

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | EpidemicAI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <div class="login-header">
+                <h2>🔐 Admin Login</h2>
+                <p>Access the EpidemicAI Control Panel</p>
+            </div>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="admin-username">Username</label>
+                    <input type="text" id="admin-username" placeholder="Enter admin username" required autocomplete="username">
+                </div>
+                <div class="input-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="Enter admin password" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
+                    Login
+                </button>
+            </form>
+            <p id="login-error" style="color: #ef4444; margin-top: 1rem; text-align: center; display: none;">❌ Invalid credentials</p>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" class="admin-dashboard hidden">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <h1>🦠 EpidemicAI</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="prediction.html">Prediction</a></li>
+                    <li><a href="alerts.html">Alerts</a></li>
+                    <li><a href="admin.html" class="active">Admin</a></li>
+                    <li><a href="docs.html">Documentation</a></li>
+                </ul>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="btn btn-secondary" id="logout-btn" style="padding: 0.5rem 1rem;">Logout</button>
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <div class="container" style="padding: 2rem 0 4rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                <h2 class="page-title" style="margin: 0;">Admin Dashboard</h2>
+                <span style="color: var(--text-secondary);">Welcome, Administrator</span>
+            </div>
+
+            <!-- Stats Overview -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                <div class="info-card" style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚨</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--accent-primary);" id="total-alerts-stat">0</div>
+                    <div style="color: var(--text-secondary);">Total Alerts</div>
+                </div>
+                <div class="info-card" style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔴</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: #ef4444;" id="high-risk-stat">0</div>
+                    <div style="color: var(--text-secondary);">High Risk</div>
+                </div>
+                <div class="info-card" style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🟡</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: #f59e0b;" id="moderate-risk-stat">0</div>
+                    <div style="color: var(--text-secondary);">Moderate Risk</div>
+                </div>
+                <div class="info-card" style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🟢</div>
+                    <div style="font-size: 2rem; font-weight: 700; color: #10b981;" id="low-risk-stat">0</div>
+                    <div style="color: var(--text-secondary);">Low Risk</div>
+                </div>
+            </div>
+
+            <!-- Create Alert Form -->
+            <div class="info-card" style="margin-bottom: 2rem;">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-primary);">➕ Create Manual Alert</h3>
+                <form id="create-alert-form">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                        <div class="input-group">
+                            <label for="disease-name">Disease Name</label>
+                            <input type="text" id="disease-name" placeholder="e.g., COVID-19, Dengue" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="region-name">Region</label>
+                            <input type="text" id="region-name" placeholder="e.g., North America" required>
+                        </div>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 1.5rem;">
+                        <label for="severity-select">Severity Level</label>
+                        <select id="severity-select" style="width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); font-size: 1rem;" required>
+                            <option value="">Select severity level</option>
+                            <option value="Low">Low</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="margin-bottom: 1.5rem;">
+                        <label for="alert-message">Alert Message</label>
+                        <textarea id="alert-message" rows="3" placeholder="Enter detailed alert message..." style="width: 100%; padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); font-size: 1rem; font-family: inherit; resize: vertical;" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
+                        🚨 Create Alert
+                    </button>
+                </form>
+            </div>
+
+            <!-- Alert List -->
+            <div class="info-card">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--text-primary); display: flex; justify-content: space-between; align-items: center;">
+                    <span>📋 All Alerts</span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <select id="filter-severity" style="padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); font-size: 0.9rem;">
+                            <option value="">All Severity</option>
+                            <option value="Low">Low</option>
+                            <option value="Moderate">Moderate</option>
+                            <option value="High">High</option>
+                        </select>
+                        <select id="filter-region" style="padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-primary); color: var(--text-primary); font-size: 0.9rem;">
+                            <option value="">All Regions</option>
+                        </select>
+                    </div>
+                </h3>
+                <div id="admin-alerts-container">
+                    <!-- Alerts will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Toast Notification -->
+            <div id="toast" class="toast hidden">
+                <span id="toast-message"></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>
+

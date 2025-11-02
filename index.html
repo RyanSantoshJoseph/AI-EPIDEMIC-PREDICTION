@@ -7,14 +7,17 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Loading Screen -->
     <div id="loading-screen" class="loading-screen">
+        <div class="loading-orb loading-orb-1"></div>
+        <div class="loading-orb loading-orb-2"></div>
+        <div class="loading-orb loading-orb-3"></div>
         <div class="loading-content">
             <div class="loading-spinner"></div>
-            <p class="loading-text">Analyzing Global Health Data...</p>
+            <p class="loading-text">Analyzing Global Health Data</p>
         </div>
     </div>
 
@@ -22,32 +25,39 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <h1>🦠 EpidemicAI</h1>
+                <h1>EpidemicAI</h1>
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="prediction.html">Prediction</a></li>
+                <li><a href="alerts.html">Alerts</a></li>
+                <li><a href="admin.html">Admin</a></li>
                 <li><a href="docs.html">Documentation</a></li>
             </ul>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-                <span class="theme-icon">🌙</span>
-            </button>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <span id="alert-badge" class="alert-counter" style="background: var(--accent-primary); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 600; display: none;"></span>
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                    <span class="theme-icon"></span>
+                </button>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" style="position: relative; overflow: hidden;">
         <div class="hero-background">
             <div class="gradient-orb gradient-orb-1"></div>
             <div class="gradient-orb gradient-orb-2"></div>
             <div class="gradient-orb gradient-orb-3"></div>
         </div>
+        <!-- 3D Globe Container -->
+        <canvas id="globe-canvas" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
         <div class="container">
-            <div class="hero-content">
+            <div class="hero-content" style="position: relative; z-index: 10;">
                 <div class="badge-container">
-                    <span class="hero-badge">🤖 AI-Powered</span>
-                    <span class="hero-badge">🌍 Global Coverage</span>
-                    <span class="hero-badge">📊 Real-Time Data</span>
+                    <span class="hero-badge">AI-Powered</span>
+                    <span class="hero-badge">Global Coverage</span>
+                    <span class="hero-badge">Real-Time Data</span>
                 </div>
                 <h2 class="hero-title">
                     AI-Based Epidemic Prediction
@@ -74,8 +84,8 @@
                     </div>
                 </div>
                 <div class="hero-cta">
-                    <a href="prediction.html" class="btn btn-primary">Get Started 🚀</a>
-                    <a href="docs.html" class="btn btn-secondary">Learn More 📚</a>
+                    <a href="prediction.html" class="btn btn-primary">Get Started</a>
+                    <a href="docs.html" class="btn btn-secondary">Learn More</a>
                 </div>
             </div>
         </div>
@@ -143,12 +153,25 @@
     <footer class="footer">
         <div class="container">
             <p class="footer-text">&copy; 2025 AI-Based Epidemic Prediction System. Capstone Project.</p>
-            <p class="footer-subtext">Made by Ryan Santosh Joseph</p>
+            <p class="footer-subtext">Built with modern web technologies and AI integration</p>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
     <script src="script.js"></script>
+    <script src="globe-3d.js"></script>
+    <script src="animations.js"></script>
+    <script>
+        // Update alert badge
+        document.addEventListener('DOMContentLoaded', () => {
+            const alerts = JSON.parse(localStorage.getItem('epidemic_alerts') || '[]');
+            const badge = document.getElementById('alert-badge');
+            if (badge && alerts.length > 0) {
+                badge.textContent = alerts.length;
+                badge.style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>
-
 
